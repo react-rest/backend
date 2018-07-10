@@ -1,0 +1,53 @@
+{
+  "name": "egg",
+  "version": "1.0.0",
+  "description": "example of egg",
+  "private": true,
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "camelcase": "^5.0.0",
+    "co-wechat-api": "^3.7.0",
+    "decamelize": "^2.0.0",
+    "egg": "^2.2.1",
+    "egg-scripts": "^2.5.0",
+    "egg-sequelize": "^3.1.4",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "mysql2": "^1.5.3",
+    "node-uuid": "^1.4.8"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.14.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^6.0.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-egg",
+    "stop": "egg-scripts stop --title=egg-server-egg",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "colter",
+  "license": "MIT"
+}
