@@ -14,10 +14,14 @@ class ButtonController extends BaseController {
   }
 
   async update(ctx) {
-    const body = ctx.request.body;
-    await this.model.upsert(body);
-
-    this.success({ success: true });
+    const button = ctx.request.body
+    const wxApi = await this.s.getWxApi(ctx.user.id);
+    try {
+      const result = await wxApi.createMenu({ button });
+      this.success(result);
+    } catch (e) {
+      ctx.throw(500, e);
+    }
   }
 
   get s() {
