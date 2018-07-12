@@ -23,6 +23,11 @@ class UserService extends BaseService {
     }
     return response;
   }
+
+  async register(data) {
+    const user = await this.model.create(data);
+    return user;
+  }
 }
 
 module.exports = UserService;

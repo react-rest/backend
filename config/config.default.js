@@ -18,7 +18,9 @@ module.exports = appInfo => {
   };
 
   config.authority = {
-    ignore: '/api/login',
+    ignore(ctx) {
+      return [ '/api/login', '/api/register' ].indexOf(ctx.request.url) >= 0;
+    },
   };
 
   config.security = {

@@ -7,9 +7,9 @@ module.exports = () => {
     try {
       const user = jwt.verify(accessToken, ctx.app.config.JWT_SECRET);
       ctx.user = user;
-      await next();
     } catch (e) {
       ctx.throw(401, '鉴权失败');
     }
+    await next();
   };
 };
