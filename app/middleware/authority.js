@@ -1,19 +1,15 @@
 'use strict';
+const jwt = require('jsonwebtoken');
 
 module.exports = () => {
   return async function authority(ctx, next) {
     const accessToken = ctx.headers['admin-access'];
-    const { User, UserToken } = ctx.model
-    const userToken = await UserToken.findOne({
-      where: { accessToken },
-      include: [
-        {
-          model: User,
-          as: 'user',
-        },
-      ],
-    });
-    ctx.user = userToken ? userToken.user : null;
-    await next();
+    try {
+      const user = jwt.verify(accessToken, ctx.app.config.JWT_SECRET);
+      ctx.user = user;
+      await next();
+    } catch (e) {
+      ctx.throw(401, '鉴权失败');
+    }
   };
 };

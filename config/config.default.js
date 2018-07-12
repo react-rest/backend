@@ -17,9 +17,15 @@ module.exports = appInfo => {
     match: '/api',
   };
 
+  config.authority = {
+    ignore: '/api/login',
+  };
+
   config.security = {
     csrf: false,
   };
+
+  config.JWT_SECRET = 'MFKCOWUR$DKH';
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql

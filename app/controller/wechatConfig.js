@@ -11,6 +11,7 @@ class WechatConfigController extends BaseController {
 
   async update(ctx) {
     const body = ctx.request.body;
+    body.userId = ctx.user.id;
     await this.model.upsert(body);
 
     this.success({ success: true });
