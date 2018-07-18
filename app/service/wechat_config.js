@@ -13,8 +13,12 @@ class WechatConfigService extends BaseService {
     const wechatConfig = await this.getConfigByUserId(userId);
     if (wechatConfig === null) this.ctx.throw(500, '尚未配置公众号');
 
-    const wxApi = WxApi(wechatConfig);
-    return wxApi;
+    return WxApi(wechatConfig);
+  }
+
+  async getFollowers(userId) {
+    const wxApi = await this.getWxApi(userId);
+    return await wxApi.getFollowers();
   }
 
   get model() {

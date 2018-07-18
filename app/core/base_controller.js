@@ -13,13 +13,20 @@ class BaseController extends Controller {
     //   console.log('e-->', e);
     // }
     // this.ctx.throw(500, 'error...')
-    // await this.ctx.model.WechatConfig.create(
-    //   {
-    //     appId: 'wx247b0636a8c6b089',
-    //     secret: '83dc5322d368b15e442ed63b3e31057f',
-    //     userId: 1,
-    //   }
-    // );
+    await this.ctx.model.WechatUser.bulkCreate([
+      {
+        openid: 'opseys1e70elMUXCG9O4tJCoXizI',
+        nickname: '峰',
+      },
+      {
+        openid: 'opseys1dI61C3UrmD62BQ-1rtVVw',
+        nickname: '缇香',
+      },
+      {
+        openid: 'opseys4GekFkkQWbFSBfe2kLJTnc',
+        nickname: '心不狠，站不稳',
+      },
+    ]);
     const lists = await this.model.findAll();
     this.success(lists);
   }
@@ -59,6 +66,10 @@ class BaseController extends Controller {
   notFound(msg) {
     msg = msg || 'not found';
     this.ctx.throw(404, msg);
+  }
+
+  async getWxApi(userId) {
+    return await this.ctx.service.wechatConfig.getWxApi(userId);
   }
 
   get s() {

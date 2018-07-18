@@ -1,31 +1,44 @@
 'use strict';
 
-const decamelize = require('decamelize');
-
-const BaseModel = require('../lib/model/BaseModel');
-
 module.exports = app => {
-  const { STRING, INTEGER, DATE } = app.Sequelize;
-  // 继承 BaseModel
-  class WechatUser extends BaseModel {
-    // coding...
-  }
-  // 将 Admin 注入 app.model 中,利用  Sequelize.Model 的 init 方法
-  WechatUser.init({
-    nickname: STRING(32),
-    age: INTEGER,
-    registerAt: DATE,
-  }, {
-    sequelize: app.model,
+  const { STRING, TINYINT, DATE, TEXT, INTEGER } = app.Sequelize;
+
+  const WechatUser = app.model.define('wechat_user', {
+    openid: {
+      type: STRING(64),
+      allowNull: false,
+    },
+    nickname: {
+      type: STRING(64),
+      allowNull: false,
+    },
+    sex: {
+      type: TINYINT(1),
+      default: 0,
+    },
+    headImgUrl: {
+      type: STRING(128),
+      field: 'head_img_url',
+    },
+    subscribedAt: {
+      type: DATE,
+      field: 'subscribed_at',
+      default: new DATE(),
+    },
+    unionId: {
+      type: STRING(64),
+      field: 'union_id',
+    },
+    groupId: {
+      type: INTEGER,
+      field: 'group_id',
+    },
+    remark: TEXT,
   });
 
-  // WechatUser.beforeDefine((attributes, options) => {
-  //   console.log(123)
-  //   if (options) {
-  //     // eslint-disable-next-line no-param-reassign
-  //     options.tableName = decamelize(options.modelName);
-  //   }
-  // });
+  WechatUser.associate = () => {
+  }
 
   return WechatUser;
-}
+};
+

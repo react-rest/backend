@@ -10,6 +10,7 @@ module.exports = appInfo => {
   config.middleware = [
     'errorHandler',
     'authority',
+    'parseSearch',
   ];
 
   // 只对 /api 前缀的 url 路径生效

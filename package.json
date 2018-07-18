@@ -15,7 +15,8 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "mysql2": "^1.5.3",
-    "node-uuid": "^1.4.8"
+    "node-uuid": "^1.4.8",
+    "query-string": "^6.1.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
